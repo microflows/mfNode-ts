@@ -11,16 +11,16 @@ You only need to implement  the interface below in your entry file.
 
 ```typescript
 export interface mfNode {
-    proto: object				## rpc proto object
-    name: string				## your node name
-    version: string				## node version
-    url: string					## node code url
-    author: string				## your name
-    description: string			## code description
-    icon: string				## code icon url (svg/png)
-    categories: Array<string>	## categories
-    resources: object			## resources like github page or project website
-    instance(): any				## return rpc functions
+    proto: object                 ## rpc proto object
+    name: string                  ## your node name
+    version: string               ## node version
+    url: string                   ## node code url
+    author: string                ## your name
+    description: string           ## code description
+    icon: string                  ## code icon url (svg/png)
+    categories: Array<string>     ## categories
+    resources: object             ## resources like github page or project website
+    instance(): any               ## return rpc functions
 }
 # More about `instance()` return, see details in: https://mali.js.org/api/#mali-%E2%87%90-emitter
 ```
@@ -31,12 +31,12 @@ This repo is both of a template and minimal mfNode example >> have a glance at t
 
 ```
 src
-├── hello.proto				    ## Grpc protobuf
-├── index.js					## Entry
-└── internel					## Logics, middlewares and your own code all here
-    ├── index.js				## 
-    └── logics					## 
-        └── Greeter.js			## Service-file, one service-file can have many rpc-Functions
+├── hello.proto                   ## Grpc protobuf
+├── index.js                      ## Entry
+└── internel                      ## Logics, middlewares and your own code all here
+    ├── index.js                  ## 
+    └── logics                    ## 
+        └── Greeter.js            ## Service-file, one service-file can have many rpc-Functions
 ```
 
 ## Cmd lines
