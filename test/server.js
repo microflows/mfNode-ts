@@ -10,7 +10,7 @@ function main() {
     
     app.start('127.0.0.1:50051')
     console.log(
-        "start at 127.0.0.1:50051...",
+        "start at 127.0.0.1:50051..."
     )
     return app
 }
