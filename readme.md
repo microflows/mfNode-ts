@@ -9,7 +9,7 @@ MfNodes developing must follow MF development specification, but it's very easy.
 
 You only need to implement  the interface below in your entry file.
 
-```typescript
+```
 export interface mfNode {
     proto: object                 ## rpc proto object
     name: string                  ## your node name
