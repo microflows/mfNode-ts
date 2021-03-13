@@ -1,3 +1,8 @@
 [
-  "index.js"
+  "node_modules/@babel/runtime/helpers/classCallCheck.js",
+  "node_modules/@babel/runtime/helpers/construct.js",
+  "node_modules/@babel/runtime/helpers/createClass.js",
+  "node_modules/@babel/runtime/helpers/isNativeReflectConstruct.js",
+  "node_modules/@babel/runtime/helpers/setPrototypeOf.js",
+  "src/index.js"
 ]

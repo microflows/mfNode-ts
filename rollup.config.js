@@ -4,13 +4,21 @@ import cjs from 'rollup-plugin-cjs-es'
 import resolve from 'rollup-plugin-node-resolve'
 import builtins from 'rollup-plugin-node-builtins'
 import json from 'rollup-plugin-json'
-import size from 'rollup-plugin-size'
 import { eslint } from 'rollup-plugin-eslint'
 import nodePolyfills from 'rollup-plugin-node-polyfills'
+import filesize from 'rollup-plugin-filesize'
+import { uglify } from 'rollup-plugin-uglify'
+
+const isProd = process.env.NODE_ENV === 'production'
 
 export default {
-  input: './src/index.js',
-  output: { file: './dist/bundle.js', format: 'cjs' },
+  input: 'src/index.js',
+  output: {
+    file: isProd ? 'dist/bundle.min.js' : 'dist/bundle.js',
+    format: 'umd',
+    exports: 'default',
+    name: 'mfNode',
+  },
   plugins: [
     nodePolyfills(),
     resolve(),
@@ -28,7 +36,7 @@ export default {
         },
       ],
     }),
-
+    filesize(),
     builtins(),
 
     eslint({
@@ -39,6 +47,7 @@ export default {
     }),
 
     babel({
+      runtimeHelpers: true,
       exclude: 'node_modules/**',
       plugins: [],
     }),
@@ -46,6 +55,6 @@ export default {
     json(),
     cjs({ nested: true }),
 
-    size(),
+    isProd && uglify(),
   ],
 }
