@@ -4,5 +4,6 @@
   "node_modules/@babel/runtime/helpers/createClass.js",
   "node_modules/@babel/runtime/helpers/isNativeReflectConstruct.js",
   "node_modules/@babel/runtime/helpers/setPrototypeOf.js",
-  "src/index.js"
+  "src/index.js",
+  "src/internel/logics/Greeter.js"
 ]

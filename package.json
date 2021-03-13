@@ -10,7 +10,6 @@
     "core-js": "^2.6.12",
     "eslint": "^7.21.0",
     "lodash": "^4.17.21",
-    "mali": "^0.40.0",
     "ncc": "^0.3.6",
     "rollup-plugin-babel": "^4.4.0",
     "rollup-plugin-cjs-es": "^1.0.0",
@@ -22,10 +21,11 @@
     "rollup-plugin-node-resolve": "^5.2.0",
     "rollup-plugin-re": "^1.0.7",
     "rollup-plugin-uglify": "^6.0.4",
-    "rollup-watch": "^4.3.1"
+    "rollup-watch": "^4.3.1",
+    "mali": "^0.40.0",
+    "@grpc/proto-loader": "^0.5.6"
   },
   "dependencies": {
-    "@grpc/proto-loader": "^0.5.6",
     "rollup": "^2.41.2"
   },
   "scripts": {

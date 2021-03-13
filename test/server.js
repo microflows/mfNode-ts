@@ -1,6 +1,6 @@
 const Mali = require('mali')
 
-const newNode = require('../node')
+const newNode = require('../build/index')
 
 const node = newNode()
 const app = new Mali(node.proto)
