@@ -63,7 +63,7 @@ It will upload your node code to Cloud.
 
 - [ ] mf-cli : gen code from internel dir and proto file, auto build-publish
 
-- [ ] rollup-plugin-gproto: a rollup plugin that can load proto file in compile time
+- [x] rollup-plugin-gproto: a rollup plugin that can load proto file in compile time
 
 **plan**
 
