@@ -8,6 +8,7 @@ import { eslint } from 'rollup-plugin-eslint'
 import nodePolyfills from 'rollup-plugin-node-polyfills'
 import filesize from 'rollup-plugin-filesize'
 import { uglify } from 'rollup-plugin-uglify'
+import proto from 'rollup-plugin-gproto'
 
 const isProd = process.env.NODE_ENV === 'production'
 
@@ -20,6 +21,7 @@ export default {
     name: 'mfNode',
   },
   plugins: [
+    proto(),
     nodePolyfills(),
     resolve(),
     re({
@@ -38,23 +40,19 @@ export default {
     }),
     filesize(),
     builtins(),
-
     eslint({
       throwOnError: true,
       throwOnWarning: true,
       include: ['src/**'],
-      exclude: ['node_modules/**'],
+      exclude: ['node_modules/**','src/*.proto'],
     }),
-
     babel({
       runtimeHelpers: true,
       exclude: 'node_modules/**',
       plugins: [],
     }),
-
     json(),
     cjs({ nested: true }),
-
     isProd && uglify(),
   ],
 }
