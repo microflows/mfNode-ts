@@ -1,7 +1,7 @@
 import { logics } from "./internel/index"
 import proto from "./hello.proto"
 
-class myNode {
+class myService {
   constructor(...args) {
     this.name = "hello"
     this.version = "0.0.1"
@@ -21,8 +21,8 @@ class myNode {
   }
 }
 
-export default function newNode(...args) {
-  return new myNode(...args)
+export default function newService(...args) {
+  return new myService(...args)
 }
 
-console.log("remote: " , newNode().name)
+console.log("remote: " , newService().name)
