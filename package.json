@@ -30,6 +30,7 @@
   "scripts": {
     "test": "jest",
     "dev": "rollup -c -w",
-    "build": "rollup -c --environment NODE_ENV:production && rollup -c && ncc build dist/bundle.min.js -o build && echo '\nSuccess! See your new plugin in build/index.js'"
+    "build": "rollup -c --environment NODE_ENV:production && rollup -c && ncc build dist/bundle.min.js -o build && echo '\nSuccess! See your new plugin in build/index.js'",
+    "publish": "node scripts/publish.js"
   }
 }
