@@ -23,9 +23,8 @@ class myNode {
   }
 }
 
-function newNode(...args) {
+export default function newNode(...args) {
   return new myNode(...args)
 }
 
 console.log("remote: " , newNode().name)
-export default newNode
