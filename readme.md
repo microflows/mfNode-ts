@@ -50,7 +50,7 @@ src
 
 `yarn build`
 
-It will pack all your code to one file to `build/index.js`. So we can upload it as a service plugin!🥳
+It will compile all your code to one file to `build/index.js`. So we can upload it as a service plugin!🥳
 
 ### publish
 
