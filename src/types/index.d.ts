@@ -1,8 +1,8 @@
-export interface mfNode {
+export default interface mfNode {
     proto: object
     name: string
     version: string
-    url: string
+    urls: string
     author: string
     description: string
     icon: string
@@ -10,9 +10,3 @@ export interface mfNode {
     resources: object
     instance(): any
 }
-
-// export type rpcinstance = {
-//     service?: any
-//     name?: any
-//     fns?: any
-// }

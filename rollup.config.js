@@ -9,6 +9,7 @@ import nodePolyfills from 'rollup-plugin-node-polyfills'
 import filesize from 'rollup-plugin-filesize'
 import { uglify } from 'rollup-plugin-uglify'
 import proto from 'rollup-plugin-gproto'
+import globals from 'rollup-plugin-node-globals'
 
 const isProd = process.env.NODE_ENV === 'production'
 
@@ -38,7 +39,7 @@ export default {
         },
       ],
     }),
-    filesize(),
+    globals(),
     builtins(),
     eslint({
       throwOnError: true,
@@ -53,6 +54,7 @@ export default {
     }),
     json(),
     cjs({ nested: true }),
+    isProd && filesize(),
     isProd && uglify(),
   ],
 }

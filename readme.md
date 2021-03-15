@@ -10,11 +10,11 @@ MfNodes developing must follow MF development specification, but it's very easy.
 You only need to implement  the interface below in your entry file.
 
 ```
-export interface mfService {
+interface mfNode {
     proto: object                 ## rpc proto object
     name: string                  ## your node name
-    version: string               ## node version
-    url: string                   ## node code url
+    version: string               ## version
+    urls: string                  ## release bundle url list or github repo url
     author: string                ## your name
     description: string           ## code description
     icon: string                  ## code icon url (svg/png)
