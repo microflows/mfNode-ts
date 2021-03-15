@@ -16,7 +16,7 @@ interface mfNode {
     version: string               ## version
     urls: string                  ## release bundle url list or github repo url
     author: string                ## your name
-    email: string                 ## your email(will be public)
+    email: string                 ## your email (will be public)
     description: string           ## code description
     icon: string                  ## code icon url (png)
     categories: Array<string>     ## categories for human
