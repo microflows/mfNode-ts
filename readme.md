@@ -46,6 +46,8 @@ src
 
 `yarn dev`
 
+hotreload code dev, code compile to `dist/bundle.js`
+
 ### build
 
 `yarn build`
