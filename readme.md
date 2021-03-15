@@ -1,6 +1,6 @@
  # MfNode
 
-Template of MicroFlow's node, easily build a microservice rpc node as usual.
+Template of MicroFlow's service node, easily build a microservice rpc node as usual.
 
 ## Getting Start
 ### MF dev specification
