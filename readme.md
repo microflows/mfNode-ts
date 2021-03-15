@@ -19,7 +19,7 @@ interface mfNode {
     email: string                 ## your email(will be public)
     description: string           ## code description
     icon: string                  ## code icon url (png)
-    categories: Array<string>     ## categories
+    categories: Array<string>     ## categories for human
     resources: object             ## resources like github page or project website
     instance(): any               ## return rpc functions
 }
