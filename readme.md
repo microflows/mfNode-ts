@@ -16,8 +16,9 @@ interface mfNode {
     version: string               ## version
     urls: string                  ## release bundle url list or github repo url
     author: string                ## your name
+    email: string                 ## your email(will be public)
     description: string           ## code description
-    icon: string                  ## code icon url (svg/png)
+    icon: string                  ## code icon url (png)
     categories: Array<string>     ## categories
     resources: object             ## resources like github page or project website
     instance(): any               ## return rpc functions

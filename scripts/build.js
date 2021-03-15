@@ -112,7 +112,7 @@ function main() {
         fs.writeFileSync('build/index.js', code)
         // write metadata
         fs.writeFileSync(
-          pwd + '/build/index.json',
+          pwd + '/build/node.json',
           JSON.stringify(addAnnotationInfoToMetaData())
         )
         shell.echo(

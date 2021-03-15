@@ -4,6 +4,7 @@ export default interface mfNode {
     version: string
     urls: string
     author: string
+    email: string
     description: string
     icon: string
     categories: Array<string>

@@ -7,6 +7,7 @@ class myService {
     this.version = "0.0.1"
     this.urls = ["https://github.com/microflows/mfNode"]
     this.author = ""
+    this.email = ""
     this.description = ""
     this.icon = ""
     this.categories = ["demo"]
