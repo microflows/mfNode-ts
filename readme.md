@@ -39,7 +39,7 @@ src
         └── Greeter.js            ## Service-file, one service-file can have many rpc-Functions
 ```
 
-## Cmd lines
+## Cmds
 
 ### develop
 
