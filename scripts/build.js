@@ -94,17 +94,17 @@ function addAnnotationInfoToMetaData() {
 }
 
 function main() {
-  // rollup build
-  if (
-    shell.exec('rollup -c --environment NODE_ENV:production && rollup -c')
-      .code !== 0
-  ) {
-    shell.echo('Rollup faild!')
-    shell.exit(1)
-  }
-
-  // ncc build
   try {
+    // rollup build
+    if (
+      shell.exec('rollup -c --environment NODE_ENV:production && rollup -c')
+        .code !== 0
+    ) {
+      shell.echo('Rollup faild!')
+      shell.exit(1)
+    }
+
+    // ncc build
     ncc(pwd + '/dist/bundle.min.js', { minify: true }).then(
       ({ code, map, assets }) => {
         if (!fs.existsSync(pwd + '/build')) shell.mkdir(pwd + '/build')
