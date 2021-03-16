@@ -19,6 +19,7 @@ class myService {
     if (arguments[0]) console.log(arguments)
   }
 
+  init() {}
   instance() {
     return logics 
   }

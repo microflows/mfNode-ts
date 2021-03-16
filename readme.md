@@ -21,6 +21,7 @@ interface mfNode {
     icon: string                  ## code icon url (png)
     categories: Array<string>     ## categories for human
     resources: object             ## resources like github page or project website
+    init(): void                  ## will be executed at the first startup
     instance(): any               ## return rpc functions
 }
 # More about `instance()` return, see details in: https://mali.js.org/api/#mali-%E2%87%90-emitter

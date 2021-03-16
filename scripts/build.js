@@ -3,7 +3,9 @@ const ncc = require('@vercel/ncc')
 const fs = require('fs')
 const protobuf = require('protobufjs')
 const crypto = require('crypto')
+const config = require('../config')
 
+const tag = config.tag
 const pwd = shell.pwd()
 
 // read metadata
@@ -89,6 +91,9 @@ function addAnnotationInfoToMetaData() {
   })
   // add file hash
   serviceMetaObj.hash = createFileHash256Sync(pwd + '/build/index.js')
+
+  // add node tag
+  serviceMetaObj.tag = tag
 
   return serviceMetaObj
 }

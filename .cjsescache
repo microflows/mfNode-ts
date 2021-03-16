@@ -1,7 +1,4 @@
 [
-  "~@babel/runtime/helpers/classCallCheck",
-  "~@babel/runtime/helpers/construct",
-  "~@babel/runtime/helpers/createClass",
   "node_modules/@babel/runtime/helpers/classCallCheck.js",
   "node_modules/@babel/runtime/helpers/construct.js",
   "node_modules/@babel/runtime/helpers/createClass.js",

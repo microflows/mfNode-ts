@@ -9,5 +9,6 @@ export default interface mfNode {
     icon: string
     categories: Array<string>
     resources: object
+    init(): void
     instance(): any
 }

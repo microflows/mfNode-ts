@@ -1,24 +1,26 @@
 // const simpleGit = require('simple-git')
-const shell = require('shelljs')
 // const git = simpleGit({
 //     baseDir: shell.pwd().toString()
 // })
-const domain = "microflow.cloud"
-
+const shell = require('shelljs')
+const config = require('../config')
+const cloud = config.cloud
+const currentBranch = shell.exec("git branch --show-current").toString().replace("\n","")
 
 // get branch
 if (
     shell.exec('git checkout release').code !== 0
   ) {
-      if (shell.exec('git checkout -b release').code !== 0) {
+      if (shell.exec('git add . && git commit -m "autocommit" && git checkout -b release').code !== 0) {
         shell.echo('Sorry this script need git!')
         shell.exit(1)
       }
   }
 
-  shell.mv("build","release")
+shell.mv("build","release")
 
-//   ensure version
+//   ensure version todo
+
 
 // git add && push todo:msg
 if (
@@ -27,11 +29,14 @@ if (
         shell.exit(1)
   }
 
-//   mv back
 
-//   upload metadata
+//   upload metadata todo
+
+
+shell.mv("release","build")
 
 // back to branch
+shell.exec('git checkout ' + currentBranch)
 
 // return print url
 console.log(

@@ -1,3 +1,4 @@
-export default config = {
-    "cloud":"microflow.cloud"
+module.exports = config = {
+    "cloud": "microflow.cloud",
+    "tag": "service"
 }
