@@ -33,7 +33,7 @@ shell.mv("build","release")
 //   ensure version todo
 
 
-// git add && push todo:msg
+// git add && push todo:msg todo:add remote repourl
 if (
     shell.exec('git add . && git commit -m "msg" && git push').code !== 0
   ) {
