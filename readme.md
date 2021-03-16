@@ -1,8 +1,23 @@
- # MfNode
+<div align="center">
+<img src="https://user-images.githubusercontent.com/53158137/111246054-94f44f00-8640-11eb-9459-3829679c03ca.png"/>
+<h1>MfNode</h1>
+<p>
+Easily build any remote module/script or UI component as usual
+</p>
 
-Template of MicroFlow's service node, easily build a microservice rpc node as usual.
+<a href="https://github.com/microflows/mfNode/blob/master/LICENSE.txt"><img src="https://img.shields.io/github/license/microflows/mfNode?color=379c9c&style=flat-square"/></a>
+<a href="https://discord.com/invite/wGSABhbCzN"><img src="https://img.shields.io/discord/813599680713457665?label=chat&logo=discord&color=379c9c&style=flat-square"/></a>
+</div>
 
 ## Getting Start
+### What is a remote module?
+
+Remote module means you can dynamically load and run it from a remote URL for the Browser or Node.js. 
+
+So you can update project-code or hotload plugins without redeploying.
+
+More Details in [nodeVM](https://github.com/microflows/nodeVM) ( MF's official runtime of remote module )
+
 ### MF dev specification
 
 MfNodes developing must follow MF development specification, but it's very easy.
