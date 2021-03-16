@@ -4,6 +4,7 @@
 // })
 const shell = require('shelljs')
 const config = require('../config')
+const fs = require('fs')
 const cloud = config.cloud
 const currentBranch = shell.exec("git branch --show-current").toString().replace("\n","")
 
@@ -16,6 +17,11 @@ if (
         shell.exit(1)
       }
   }
+
+if (!fs.existsSync("build")) {
+  shell.echo('You should run build before publish!')
+  shell.exit(1)
+}
 
 shell.mv("build","release")
 
