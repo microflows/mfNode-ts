@@ -10,6 +10,12 @@ Easily build any remote module/script or UI component as usual
 </div>
 
 ## Getting Start
+### What is a remote module?
+
+Remote module means you can dynamically load and run it from a remote URL for the Browser or Node.js. Update project or hotload plugins without redeploying.
+
+Details in [nodeVM](https://github.com/microflows/nodeVM) a runtime of remote module
+
 ### MF dev specification
 
 MfNodes developing must follow MF development specification, but it's very easy.
