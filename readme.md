@@ -1,6 +1,14 @@
- # MfNode
+<div align="center">
+<img src="https://avatars.githubusercontent.com/u/80379301?s=150"/>
+<h1>MfNode</h1>
+<p>
+Easily build any remote module/script or UI component as usual
+</p>
 
-Easily build any remote module/script or UI component as usual. Also the official template of MicroFlow's microservice node as usual.
+<a href="https://github.com/microflows/mfNode/blob/master/LICENSE.txt"><img src="https://img.shields.io/github/license/microflows/mfNode?color=379c9c&style=flat-square"/></a>
+<a href="https://discord.com/invite/wGSABhbCzN"><img src="https://img.shields.io/discord/813599680713457665?label=chat&logo=discord&color=379c9c&style=flat-square"/></a>
+</div>
+
 
 ## Getting Start
 ### MF dev specification
