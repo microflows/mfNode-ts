@@ -1,5 +1,5 @@
 <div align="center">
-<img src="https://avatars.githubusercontent.com/u/80379301?s=150"/>
+<img src="https://https://user-images.githubusercontent.com/53158137/111245523-bdc81480-863f-11eb-92a7-1e51cb5a9330.png"/>
 <h1>MfNode</h1>
 <p>
 Easily build any remote module/script or UI component as usual
