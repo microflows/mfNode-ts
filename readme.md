@@ -16,7 +16,7 @@ Remote module means you can dynamically load and run it from a remote URL for th
 
 So you can update project-code or hotload plugins without redeploying.
 
-Details in [nodeVM](https://github.com/microflows/nodeVM) MF's official runtime of remote module
+More Details in [nodeVM](https://github.com/microflows/nodeVM) ( MF's official runtime of remote module )
 
 ### MF dev specification
 
