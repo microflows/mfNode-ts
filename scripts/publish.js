@@ -12,7 +12,8 @@ const currentBranch = shell.exec("git branch --show-current").toString().replace
 if (
     shell.exec('git checkout release').code !== 0
   ) {
-      if (shell.exec('git add . && git commit -m "autocommit" && git checkout -b release').code !== 0) {
+    shell.exec("git add . && git commit -m 'autocommit'")
+      if (shell.exec('git checkout -b release').code !== 0) {
         shell.echo('Sorry this script need git!')
         shell.exit(1)
       }
