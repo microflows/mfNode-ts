@@ -16,6 +16,10 @@ const currentBranch = shell
   .exec('git branch --show-current')
   .toString()
   .replace('\n', '')
+if (currentBranch === "release") {
+  shell.echo('You should not dev in release branch! Please switch to your master/main branch!')
+  shell.exit(1)
+}
 shell.echo()
 
 // ensure builded
@@ -60,12 +64,7 @@ shell.echo()
 
 // commit to current branch
 shell.echo('\x1B[36mCommit to current branch:\x1B[0m')
-if (
-  shell.exec("git add . && git commit -m '" + commitMessage + "'").code !== 0
-) {
-  shell.echo('Commit Failed!')
-  shell.exit(1)
-}
+shell.exec("git add . && git commit -m '" + commitMessage + "'")
 shell.echo()
 
 // Switch to release branch
