@@ -131,7 +131,7 @@ function gitPush(branchs) {
     shell.echo('\x1B[36mBack to ' + currentBranch + ' branch:\x1B[0m')
     shell.exec('git checkout ' + currentBranch)
     shell.echo()
-    shell.echo('\x1B[32m>>> Push to' + branch + ' branch success! <<<\n\x1B[0m')
+    shell.echo('\x1B[32m>>> Push to ' + branch + ' branch success! <<<\n\x1B[0m')
   })
 
   shell.mv('release', 'build')
