@@ -91,6 +91,18 @@ if (
     "git merge master && git push --set-upstream release release"
   ).code !== 0
 ) {
+  shell.echo('Merge failed!')
+  shell.exit(1)
+}
+shell.echo()
+
+// Push to remote release branch
+shell.echo('\x1B[36mPush to remote release branch:\x1B[0m')
+if (
+  shell.exec(
+    "git push --set-upstream release release"
+  ).code !== 0
+) {
   shell.echo('Push failed!')
   shell.exit(1)
 }
