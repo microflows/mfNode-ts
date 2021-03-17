@@ -93,7 +93,7 @@ function gitPush(branchs) {
   shell.echo()
 
   branchs.forEach((branch) => {
-    shell.echo('\x1B[36m>>> Push to ' + branch + ' branch <<<\x1B[0m')
+    shell.echo('\x1B[34m>>> Push to ' + branch + ' branch <<<\n\x1B[0m')
     // Switch to target branch
     shell.echo('\x1B[36mSwitch to ' + branch + ' branch:\x1B[0m')
     shell.exec('git config advice.addIgnoredFile false')
@@ -131,7 +131,7 @@ function gitPush(branchs) {
     shell.echo('\x1B[36mBack to ' + currentBranch + ' branch:\x1B[0m')
     shell.exec('git checkout ' + currentBranch)
     shell.echo()
-    shell.echo('\x1B[32m>>> Push to' + branch + ' branch success! <<<\x1B[0m')
+    shell.echo('\x1B[32m>>> Push to' + branch + ' branch success! <<<\n\x1B[0m')
   })
 
   shell.mv('release', 'build')
