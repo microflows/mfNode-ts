@@ -10,6 +10,7 @@
     "babel-preset-es2015": "^6.24.1",
     "core-js": "^2.6.12",
     "eslint": "^7.21.0",
+    "iniparser": "^1.0.5",
     "lodash": "^4.17.21",
     "protobufjs": "^6.10.2",
     "readline-sync": "^1.4.10",
