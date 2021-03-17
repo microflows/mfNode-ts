@@ -1,4 +1,4 @@
-const readlineSync = require('readline-sync')
+// const readlineSync = require('readline-sync')
 const shell = require('shelljs')
 const fs = require('fs')
 const iniparser = require('iniparser')
@@ -54,7 +54,7 @@ const cloud = config.cloud
 
 const currentVersion = '0.0.0'
 
-function main(branchs) {
+function gitPush(branchs) {
   // ensure the right repo url
   // if (
   //   readlineSync.question(
@@ -93,6 +93,7 @@ function main(branchs) {
   shell.echo()
 
   branchs.forEach((branch) => {
+    shell.echo('\x1B[36m>>> Push to ' + branch + ' branch <<<\x1B[0m')
     // Switch to target branch
     shell.echo('\x1B[36mSwitch to ' + branch + ' branch:\x1B[0m')
     shell.exec('git config advice.addIgnoredFile false')
@@ -130,6 +131,7 @@ function main(branchs) {
     shell.echo('\x1B[36mBack to ' + currentBranch + ' branch:\x1B[0m')
     shell.exec('git checkout ' + currentBranch)
     shell.echo()
+    shell.echo('\x1B[32m>>> Push to' + branch + ' branch success! <<<\x1B[0m')
   })
 
   shell.mv('release', 'build')
@@ -143,7 +145,7 @@ function main(branchs) {
   shell.echo()
 }
 
-main(['release', metadata.version])
+gitPush(['release', metadata.version])
 
 // upload metadata todo
 shell.echo('\x1B[36mUpload metadata:\x1B[0m')

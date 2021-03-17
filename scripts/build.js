@@ -83,10 +83,7 @@ function addAnnotationInfoToMetaData() {
         .replace('raw.githubusercontent.com', 'cdn.jsdelivr.net/gh')
       if (nurl.endsWith('/')) {
         nurl =
-          nurl.slice(0, -1) +
-          '@' +
-          serviceMetaObj.version +
-          '/release/index.js'
+          nurl.slice(0, -1) + '@' + serviceMetaObj.version + '/release/index.js'
       } else {
         nurl = nurl + '@' + serviceMetaObj.version + '/release/index.js'
       }
@@ -105,6 +102,7 @@ function addAnnotationInfoToMetaData() {
 function main() {
   try {
     // rollup build
+    shell.echo('\x1B[36mRollup build\x1B[0m')
     if (
       shell.exec('rollup -c --environment NODE_ENV:production && rollup -c')
         .code !== 0
@@ -112,7 +110,8 @@ function main() {
       shell.echo('Rollup faild!')
       shell.exit(1)
     }
-
+    shell.echo()
+    shell.echo('\x1B[36mNCC build\x1B[0m')
     // ncc build
     ncc(pwd + '/dist/bundle.min.js', { minify: true }).then(
       ({ code, map, assets }) => {
@@ -125,12 +124,14 @@ function main() {
           JSON.stringify(addAnnotationInfoToMetaData())
         )
         shell.echo(
-          "\nSuccess! Use 'npm run release' to release your new micro service! "
+          "\n\x1B[32mSuccess! Use 'yarn release' to release your new " +
+            tag +
+            '! \x1B[0m'
         )
       }
     )
   } catch (error) {
-    shell.echo('\nFailed!')
+    shell.echo('\n\x1B[31m[Error]Failed!\x1B[0m')
     throw error
   }
 }
