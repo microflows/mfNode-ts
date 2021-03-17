@@ -4,7 +4,6 @@
 <p>
 Easily build any remote module/script or UI component as usual
 </p>
-
 <a href="https://github.com/microflows/mfNode/blob/master/LICENSE.txt"><img src="https://img.shields.io/github/license/microflows/mfNode?color=379c9c&style=flat-square"/></a>
 <a href="https://discord.com/invite/wGSABhbCzN"><img src="https://img.shields.io/discord/813599680713457665?label=chat&logo=discord&color=379c9c&style=flat-square"/></a>
 </div>
@@ -14,7 +13,7 @@ Easily build any remote module/script or UI component as usual
 ### Steps
 
 - [ ] Fork this repo
-- [ ] Git clone your repo
+- [ ] Git clone your repo to local
 - [ ] Use `yarn && yarn dev` to start development
 - [ ] Use `yarn build && yarn release` to publish
 - [ ] View the release in your cloud account
