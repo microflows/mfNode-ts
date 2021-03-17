@@ -28,7 +28,7 @@ shell.exec("git add . && git commit -m '" + commitMessage + "'").code !== 0) {
 if (
     shell.exec('git checkout release').code !== 0
   ) {
-      if (shell.exec('git checkout -b release origin/release').code !== 0) {
+      if (shell.exec('git checkout -b release && git branch --set-upstream-to=origin/release').code !== 0) {
         shell.exit(1)
       }
   }
