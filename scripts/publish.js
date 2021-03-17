@@ -72,6 +72,11 @@ shell.echo('\x1B[36mCommit to current branch:\x1B[0m')
 shell.exec("git add . && git commit -m '" + commitMessage + "'")
 shell.echo()
 
+// push to current branch
+shell.echo('\x1B[36mPush to current branch:\x1B[0m')
+shell.exec("git push")
+shell.echo()
+
 // Switch to release branch
 shell.echo('\x1B[36mSwitch to release branch:\x1B[0m')
 shell.exec('git config advice.addIgnoredFile false')
