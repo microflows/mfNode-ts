@@ -17,7 +17,7 @@ const currentBranch = shell
   .toString()
   .replace('\n', '')
 if (currentBranch === "release") {
-  shell.echo('You should not dev in release branch! Please switch to your master/main branch!')
+  shell.echo('You should not dev in release branch! Please switch to your default branch!')
   shell.exit(1)
 }
 shell.echo()
