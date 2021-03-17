@@ -16,8 +16,10 @@ const currentBranch = shell
   .exec('git branch --show-current')
   .toString()
   .replace('\n', '')
-if (currentBranch === "release") {
-  shell.echo('You should not dev in release branch! Please switch to your default branch!')
+if (currentBranch === 'release') {
+  shell.echo(
+    'You should not dev in release branch! Please switch to your default branch!'
+  )
   shell.exit(1)
 }
 shell.echo()
@@ -62,6 +64,9 @@ shell.echo(currentVersion, version)
 // version >
 shell.echo()
 
+// ---
+shell.mv('build', 'release')
+
 // commit to current branch
 shell.echo('\x1B[36mCommit to current branch:\x1B[0m')
 shell.exec("git add . && git commit -m '" + commitMessage + "'")
@@ -80,15 +85,11 @@ if (shell.exec('git checkout release').code !== 0) {
 }
 shell.echo()
 
-// ---
-shell.mv('build', 'release')
-
 // Merge master to release branch
 shell.echo('\x1B[36mMerge master to release branch:\x1B[0m')
 if (
-  shell.exec(
-    "git merge master && git push --set-upstream release release"
-  ).code !== 0
+  shell.exec('git merge master && git push --set-upstream release release')
+    .code !== 0
 ) {
   shell.exec('git checkout ' + currentBranch)
   shell.echo('Push failed!')
@@ -101,13 +102,13 @@ shell.echo('\x1B[36mUpload metadata:\x1B[0m')
 console.log('upload...')
 shell.echo()
 
-shell.mv('release', 'build')
-// ---
-
 // back to branch
-shell.echo('\x1B[36mBack to master branch:\x1B[0m')
+shell.echo('\x1B[36mBack to ' + currentBranch + ' branch:\x1B[0m')
 shell.exec('git checkout ' + currentBranch)
 shell.echo()
+
+shell.mv('release', 'build')
+// ---
 
 // print urls
 shell.echo(
