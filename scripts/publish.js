@@ -22,7 +22,6 @@ const commitMessage = name + ": " + version
 // 确认仓库地址
 // ensure version todo
 
-
 // switch to release branch
 if (
 shell.exec("git add . && git commit -m '" + commitMessage + "'").code !== 0) {
@@ -41,7 +40,7 @@ if (
 shell.mv("build","release")
 
 if (
-    shell.exec("git add . && git commit -m '" + commitMessage + "' && git push --set-upstream release release").code !== 0
+    shell.exec("git add * && git commit -m '" + commitMessage + "' && git push --set-upstream release release").code !== 0
   ) {
       shell.echo("Push failed!")
       shell.exit(1)
