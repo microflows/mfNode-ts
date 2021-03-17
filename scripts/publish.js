@@ -90,6 +90,7 @@ if (
     "git merge master && git push --set-upstream release release"
   ).code !== 0
 ) {
+  shell.exec('git checkout ' + currentBranch)
   shell.echo('Push failed!')
   shell.exit(1)
 }
