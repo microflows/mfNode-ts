@@ -2,6 +2,14 @@ const readlineSync = require('readline-sync')
 const shell = require('shelljs')
 const fs = require('fs')
 
+// ensure git is installed
+shell.echo('\x1B[36mGit Version:\x1B[0m')
+if (shell.exec('git --version').code !== 0) {
+  shell.echo('Sorry this script need git!')
+  shell.exit(1)
+}
+shell.echo()
+
 // get current branch
 shell.echo('\x1B[36mCurrent branch:\x1B[0m')
 const currentBranch = shell
@@ -27,9 +35,9 @@ const commitMessage = name + ': ' + version
 const config = require('../config')
 const cloud = config.cloud
 
-const currentVersion = "0.0.0"
+const currentVersion = '0.0.0'
 
-// ensure the right repo url
+// ensure the right repo url todo:with array
 if (
   readlineSync.question(
     '\x1B[36mIs this your git repo address?(y/n)\x1B[0m ↓↓↓\n' +
@@ -42,25 +50,27 @@ if (
   shell.echo('Sorry, please write the right repo url!')
   shell.exit(1)
 }
+shell.echo()
 
 // ensure version todo
-shell.echo('\x1B[36mEnsure the version right\x1B[0m')
-shell.echo(currentVersion,version)
-// version > 
+shell.echo('\x1B[36mEnsure the version right:\x1B[0m')
+shell.echo(currentVersion, version)
+// version >
 shell.echo()
 
 // commit to current branch
-shell.echo('\x1B[36mCommit to current branch\x1B[0m')
+shell.echo('\x1B[36mCommit to current branch:\x1B[0m')
 if (
   shell.exec("git add . && git commit -m '" + commitMessage + "'").code !== 0
 ) {
-  shell.echo('Sorry this script need git!')
+  shell.echo('Commit Failed!')
   shell.exit(1)
 }
 shell.echo()
 
 // Switch to release branch
-shell.echo('\x1B[36mSwitch to release branch\x1B[0m')
+shell.echo('\x1B[36mSwitch to release branch:\x1B[0m')
+shell.exec('git config advice.addIgnoredFile false')
 if (shell.exec('git checkout release').code !== 0) {
   if (
     shell.exec('git checkout -b release && git remote add release ' + git)
@@ -74,13 +84,11 @@ shell.echo()
 // ---
 shell.mv('build', 'release')
 
-// commit to release branch
-shell.echo('\x1B[36mCommit to release branch\x1B[0m')
+// Merge master to release branch
+shell.echo('\x1B[36mMerge master to release branch:\x1B[0m')
 if (
   shell.exec(
-    "git add * && git commit -m '" +
-      commitMessage +
-      "' && git push --set-upstream release release"
+    "git merge master && git push --set-upstream release release"
   ).code !== 0
 ) {
   shell.echo('Push failed!')
@@ -96,7 +104,7 @@ shell.mv('release', 'build')
 // ---
 
 // back to branch
-shell.echo('\x1B[36mBack to master branch\x1B[0m')
+shell.echo('\x1B[36mBack to master branch:\x1B[0m')
 shell.exec('git checkout ' + currentBranch)
 shell.echo()
 
