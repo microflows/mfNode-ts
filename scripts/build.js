@@ -121,7 +121,7 @@ function main() {
           JSON.stringify(addAnnotationInfoToMetaData())
         )
         shell.echo(
-          "\nSuccess! Use 'npm run publish' to release your new micro service! "
+          "\nSuccess! Use 'npm run release' to release your new micro service! "
         )
       }
     )

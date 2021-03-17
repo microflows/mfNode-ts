@@ -70,9 +70,9 @@ hotreload code dev, code compile to `dist/bundle.js`
 
 It will compile all your code to one file to `build/index.js`. So we can upload it as a service plugin!🥳
 
-### publish
+### release
 
-`yarn publish`
+`yarn release`
 
 It will upload your node code to Cloud.
 
