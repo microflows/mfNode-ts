@@ -82,9 +82,13 @@ function addAnnotationInfoToMetaData() {
         .replace('github.com', 'cdn.jsdelivr.net/gh')
         .replace('raw.githubusercontent.com', 'cdn.jsdelivr.net/gh')
       if (nurl.endsWith('/')) {
-        nurl = nurl.slice(0, -1) + '@release/release/index.js'
+        nurl =
+          nurl.slice(0, -1) +
+          '@' +
+          newServiceMetaObj.version +
+          '/release/index.js'
       } else {
-        nurl = nurl + '@release/release/index.js'
+        nurl = nurl + '@' + newServiceMetaObj.version + '/release/index.js'
       }
       serviceMetaObj.urls[index] = nurl
     }

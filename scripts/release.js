@@ -153,15 +153,15 @@ shell.echo()
 shell.echo(
   "\x1B[32mYour release has been upload to cloud, your mfNode's cdn address:\x1B[0m" +
     '\n\t' +
-    metadata.urls
-      .map((url) => url.replace('@release', '@' + version))
-      .join('\n') +
+    metadata.urls.join('\n') +
     '\n'
 )
 
 shell.echo(
   '\x1B[32mAnd this is a rolling update address, use it with caution:\x1B[0m' +
     '\n\t' +
-    metadata.urls.filter((url) => url.indexOf('@release') !== -1) +
+    metadata.urls
+      .map((url) => url.replace('@' + version, '@release'))
+      .join('\n') +
     '\n'
 )
