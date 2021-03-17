@@ -85,7 +85,9 @@ function main() {
   // push to current branch
   shell.echo('\x1B[36mPush to current branch:\x1B[0m')
   if (shell.exec('git push').code !== 0) {
-    shell.echo('\x1B[31m[Error] Not a valid git repo url! You should fork this repo first!\x1B[0m')
+    shell.echo(
+      '\x1B[31m[Error] Not a valid git repo url! You should fork this repo first!\x1B[0m'
+    )
     shell.exit(1)
   }
   shell.echo()
@@ -95,9 +97,8 @@ function main() {
   shell.exec('git config advice.addIgnoredFile false')
   if (shell.exec('git checkout release').code !== 0) {
     if (
-      shell.exec(
-        'git checkout -b release && git remote add release ' + git
-      ).code !== 0
+      shell.exec('git checkout -b release && git remote add release ' + git)
+        .code !== 0
     ) {
       shell.exit(1)
     }
