@@ -30,6 +30,7 @@ rl.question("\x1B[36mIs this your git repo address?(y/n) >>> \x1B[0m" + git, a =
     shell.echo('Sorry, please write the right repo url!')
     shell.exit(1)
   }
+  rl.close()
 })
 
 
