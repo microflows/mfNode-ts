@@ -10,6 +10,15 @@ Easily build any remote module/script or UI component as usual
 </div>
 
 ## Getting Start
+
+### Steps
+
+- [ ] Fork this repo
+- [ ] Git clone your repo
+- [ ] Use `yarn && yarn dev` to start development
+- [ ] Use `yarn build && yarn release` to publish
+- [ ] View the release in your cloud account
+
 ### What is a remote module?
 
 Remote module means you can dynamically load and run it from a remote URL for the Browser or Node.js. 
