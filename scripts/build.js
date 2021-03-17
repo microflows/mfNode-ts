@@ -85,10 +85,10 @@ function addAnnotationInfoToMetaData() {
         nurl =
           nurl.slice(0, -1) +
           '@' +
-          newServiceMetaObj.version +
+          serviceMetaObj.version +
           '/release/index.js'
       } else {
-        nurl = nurl + '@' + newServiceMetaObj.version + '/release/index.js'
+        nurl = nurl + '@' + serviceMetaObj.version + '/release/index.js'
       }
       serviceMetaObj.urls[index] = nurl
     }
