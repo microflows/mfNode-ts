@@ -58,7 +58,7 @@ function main() {
   // ensure the right repo url todo:with array
   if (
     readlineSync.question(
-      '\x1B[36mIs this your git repo address?(y/n)\x1B[0m ↓↓↓\n' + git
+      '\x1B[36mIs this your git repo address?(y/n)\x1B[0m ↓↓↓\n' + git + '\t\n'
     ) !== 'y'
   ) {
     shell.echo(
@@ -93,7 +93,7 @@ function main() {
   if (shell.exec('git checkout release').code !== 0) {
     if (
       shell.exec(
-        'git checkout -b release && git remote add release ' + git + '\t\n'
+        'git checkout -b release && git remote add release ' + git
       ).code !== 0
     ) {
       shell.exit(1)
