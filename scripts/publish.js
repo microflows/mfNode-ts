@@ -3,10 +3,21 @@
 //     baseDir: shell.pwd().toString()
 // })
 const readline = require('readline')
-const rl = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout
-})
+const readSyncByRl = (tips) => {
+  tips = tips || '> '
+
+  return new Promise((resolve) => {
+      const rl = readline.createInterface({
+          input: process.stdin,
+          output: process.stdout
+      })
+
+      rl.question(tips, (answer) => {
+          rl.close()
+          resolve(answer.trim())
+      })
+  })
+}
 const shell = require('shelljs')
 const config = require('../config')
 const fs = require('fs')
@@ -25,12 +36,14 @@ const git = metadata.urls[0] || ""
 const commitMessage = name + ": " + version
 
 // 确认仓库地址
-rl.question("\x1B[36mIs this your git repo address?(y/n) >>> \x1B[0m" + git, a => {
-  if (a !== "y") {
-    shell.echo('Sorry, please write the right repo url!')
-    shell.exit(1)
-  }
-  rl.close()
+readSyncByRl("\x1B[36mIs this your git repo address?(y/n)\x1B[0m >>> " + git).then(a => {
+
+    if (a !== "y") {
+      shell.echo('Sorry, please write the right repo url!')
+      shell.exit(1)
+    }
+    rl.close()
+
 })
 
 
