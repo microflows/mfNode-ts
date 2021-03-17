@@ -1,34 +1,40 @@
-// const simpleGit = require('simple-git')
-// const git = simpleGit({
-//     baseDir: shell.pwd().toString()
-// })
-var readlineSync = require('readline-sync')
+const readlineSync = require('readline-sync')
 const shell = require('shelljs')
-const config = require('../config')
 const fs = require('fs')
-const cloud = config.cloud
-shell.echo("\x1B[36mCurrent branch:\x1B[0m")
+
+// get current branch
+shell.echo('\x1B[36mCurrent branch:\x1B[0m')
 const currentBranch = shell
   .exec('git branch --show-current')
   .toString()
   .replace('\n', '')
 shell.echo()
 
+// ensure builded
 if (!fs.existsSync('build')) {
   shell.echo('You should run build before publish!')
   shell.exit(1)
 }
-const metadata = JSON.parse(fs.readFileSync('build/node.json'))
 
+// read metadata
+const metadata = JSON.parse(fs.readFileSync('build/node.json'))
 const name = metadata.name
 const version = metadata.version
 const git = metadata.urls[0] || ''
 const commitMessage = name + ': ' + version
 
-// 确认仓库地址
+// read config
+const config = require('../config')
+const cloud = config.cloud
+
+// ensure the right repo url
 if (
   readlineSync.question(
-    '\x1B[36mIs this your git repo address?(y/n)\x1B[0m ↓↓↓\n' + git.replace("cdn.jsdelivr.net/gh","github.com").replace("@release/release/index.js","") +"\n"
+    '\x1B[36mIs this your git repo address?(y/n)\x1B[0m ↓↓↓\n' +
+      git
+        .replace('cdn.jsdelivr.net/gh', 'github.com')
+        .replace('@release/release/index.js', '') +
+      '\n'
   ) !== 'y'
 ) {
   shell.echo('Sorry, please write the right repo url!')
@@ -37,14 +43,18 @@ if (
 
 // ensure version todo
 
-// switch to release branch
+// commit to current branch
+shell.echo('\x1B[36mCommit to current branch\x1B[0m')
 if (
   shell.exec("git add . && git commit -m '" + commitMessage + "'").code !== 0
 ) {
   shell.echo('Sorry this script need git!')
   shell.exit(1)
 }
+shell.echo()
 
+// Switch to release branch
+shell.echo('\x1B[36mSwitch to release branch\x1B[0m')
 if (shell.exec('git checkout release').code !== 0) {
   if (
     shell.exec('git checkout -b release && git remote add release ' + git)
@@ -53,7 +63,9 @@ if (shell.exec('git checkout release').code !== 0) {
     shell.exit(1)
   }
 }
+shell.echo()
 
+// ---
 shell.mv('build', 'release')
 
 if (
