@@ -12,7 +12,7 @@ class myService {
     this.icon = ""
     this.categories = ["demo"]
     this.resources = {
-      "github":"https://github.com/microflows/mfNode"
+      "git":"https://github.com/microflows/mfNode"
     }
     this.proto = proto
     // handler your arguments here

@@ -8,9 +8,24 @@ const fs = require('fs')
 const cloud = config.cloud
 const currentBranch = shell.exec("git branch --show-current").toString().replace("\n","")
 
-// get branch
+if (!fs.existsSync("build")) {
+  shell.echo('You should run build before publish!')
+  shell.exit(1)
+}
+const metadata = JSON.parse(fs.readFileSync("build/node.json"))
+
+const name = metadata.name
+const version = metadata.version
+const git = metadata.urls[0]
+const commitMessage = name + ": " + version
+
+// 确认仓库地址
+// ensure version todo
+
+
+// switch to release branch
 if (
-shell.exec("git add . && git commit -m 'autocommit'").code !== 0) {
+shell.exec("git add . && git commit -m '" + commitMessage + "'").code !== 0) {
   shell.echo('Sorry this script need git!')
   shell.exit(1)
 }
@@ -18,38 +33,28 @@ shell.exec("git add . && git commit -m 'autocommit'").code !== 0) {
 if (
     shell.exec('git checkout release').code !== 0
   ) {
-      if (shell.exec('git checkout -b release').code !== 0) {
+      if (shell.exec('git checkout -b release && git remote add release ' + git).code !== 0) {
         shell.exit(1)
       }
   }
 
-if (!fs.existsSync("build")) {
-  shell.echo('You should run build before publish!')
-  shell.exit(1)
-}
-
 shell.mv("build","release")
 
-//   ensure version todo
-
-
-// git add && push todo:msg todo:add remote repourl
 if (
-    shell.exec('git add . && git commit -m "msg" && git push').code !== 0
+    shell.exec("git add . && git commit -m '" + commitMessage + "' && git push --set-upstream release release").code !== 0
   ) {
-        shell.exit(1)
+      shell.echo("Push failed!")
+      shell.exit(1)
   }
 
-
 //   upload metadata todo
-JSON.parse(fs.readFileSync("build/node.json"))
+// fetch post to cloud
+console.log("upload...")
 
 shell.mv("release","build")
 
 // back to branch
 shell.exec('git checkout ' + currentBranch)
 
-// return print url
-console.log(
-    shell.pwd().toString()
-)
+// print urls
+shell.echo("Your release has been upload to cloud, your mfNode's cdn address:"+ "\n\t" + metadata.urls.join("\n"))
