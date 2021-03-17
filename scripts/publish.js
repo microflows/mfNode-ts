@@ -42,7 +42,7 @@ if (
 
 
 //   upload metadata todo
-
+JSON.parse(fs.readFileSync("build/node.json"))
 
 shell.mv("release","build")
 
