@@ -36,12 +36,12 @@ const metadata = JSON.parse(fs.readFileSync('build/node.json'))
 const name = metadata.name
 const version = metadata.version
 
-// todo 从git文件中获取
-console.log(
-
-  iniparser.parseSync('.git/config')
-)
-const git = metadata.urls[0] || ''
+// git info
+if (!fs.existsSync('.git/config')) {
+  shell.echo('Not a valid git repo!')
+  shell.exit(1)
+}
+const git = iniparser.parseSync('.git/config')['remote "origin"']["url"]
 const commitMessage = name + ': ' + version
 
 // read config
@@ -139,4 +139,4 @@ function main() {
   )
   shell.echo()
 }
-// main()
+main()

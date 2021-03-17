@@ -1,9 +1,9 @@
 [
-  "node_modules/@babel/runtime/helpers/classCallCheck.js",
-  "node_modules/@babel/runtime/helpers/construct.js",
-  "node_modules/@babel/runtime/helpers/createClass.js",
-  "node_modules/@babel/runtime/helpers/isNativeReflectConstruct.js",
-  "node_modules/@babel/runtime/helpers/setPrototypeOf.js",
+  "node_modules/_@babel_runtime@7.13.10@@babel/runtime/helpers/classCallCheck.js",
+  "node_modules/_@babel_runtime@7.13.10@@babel/runtime/helpers/construct.js",
+  "node_modules/_@babel_runtime@7.13.10@@babel/runtime/helpers/createClass.js",
+  "node_modules/_@babel_runtime@7.13.10@@babel/runtime/helpers/isNativeReflectConstruct.js",
+  "node_modules/_@babel_runtime@7.13.10@@babel/runtime/helpers/setPrototypeOf.js",
   "src/hello.proto",
   "src/index.js",
   "src/internel/logics/Greeter.js"
