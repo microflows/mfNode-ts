@@ -54,7 +54,7 @@ const cloud = config.cloud
 
 const currentVersion = '0.0.0'
 
-function main() {
+function main(branchs) {
   // ensure the right repo url
   // if (
   //   readlineSync.question(
@@ -92,41 +92,45 @@ function main() {
   }
   shell.echo()
 
-  // Switch to release branch
-  shell.echo('\x1B[36mSwitch to release branch:\x1B[0m')
-  shell.exec('git config advice.addIgnoredFile false')
-  if (shell.exec('git checkout release').code !== 0) {
+  branchs.forEach((branch) => {
+    // Switch to target branch
+    shell.echo('\x1B[36mSwitch to ' + branch + ' branch:\x1B[0m')
+    shell.exec('git config advice.addIgnoredFile false')
+    if (shell.exec('git checkout ' + branch).code !== 0) {
+      if (
+        shell.exec(
+          'git checkout -b ' +
+            branch +
+            ' && git remote add ' +
+            branch +
+            ' ' +
+            git
+        ).code !== 0
+      ) {
+        shell.exit(1)
+      }
+    }
+    shell.echo()
+
+    // Merge master to release branch
+    shell.echo('\x1B[36mMerge master to ' + branch + ' branch:\x1B[0m')
     if (
-      shell.exec('git checkout -b release && git remote add release ' + git)
-        .code !== 0
+      shell.exec(
+        'git merge master && git push --set-upstream release ' + branch
+      ).code !== 0
     ) {
+      shell.exec('git checkout ' + currentBranch)
+      shell.mv('release', 'build')
+      shell.echo('Push failed!')
       shell.exit(1)
     }
-  }
-  shell.echo()
+    shell.echo()
 
-  // Merge master to release branch
-  shell.echo('\x1B[36mMerge master to release branch:\x1B[0m')
-  if (
-    shell.exec('git merge master && git push --set-upstream release release')
-      .code !== 0
-  ) {
+    // back to branch
+    shell.echo('\x1B[36mBack to ' + currentBranch + ' branch:\x1B[0m')
     shell.exec('git checkout ' + currentBranch)
-    shell.mv('release', 'build')
-    shell.echo('Push failed!')
-    shell.exit(1)
-  }
-  shell.echo()
-
-  // upload metadata todo
-  shell.echo('\x1B[36mUpload metadata:\x1B[0m')
-  console.log('upload...')
-  shell.echo()
-
-  // back to branch
-  shell.echo('\x1B[36mBack to ' + currentBranch + ' branch:\x1B[0m')
-  shell.exec('git checkout ' + currentBranch)
-  shell.echo()
+    shell.echo()
+  })
 
   shell.mv('release', 'build')
   // ---
@@ -137,13 +141,27 @@ function main() {
     "git rm -r release && git commit -m '" + commitMessage + "' && git push"
   )
   shell.echo()
-
-  // print urls
-  shell.echo(
-    "\x1B[32mYour release has been upload to cloud, your mfNode's cdn address:\x1B[0m" +
-      '\n\t' +
-      metadata.urls.join('\n')
-  )
-  shell.echo()
 }
-main()
+
+main(['release', metadata.version])
+
+// upload metadata todo
+shell.echo('\x1B[36mUpload metadata:\x1B[0m')
+console.log('upload...')
+shell.echo()
+
+shell.echo(
+  "\x1B[32mYour release has been upload to cloud, your mfNode's cdn address:\x1B[0m" +
+    '\n\t' +
+    metadata.urls
+      .forEach((url) => url.replace('@release', '@' + version))
+      .join('\n') +
+    '\n'
+)
+
+shell.echo(
+  '\x1B[32mAnd this is a rolling update address, use it with caution:\x1B[0m' +
+    '\n\t' +
+    metadata.urls.filter((url) => url.indexOf('@release') !== -1) +
+    '\n'
+)

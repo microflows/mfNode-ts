@@ -34,16 +34,16 @@ You only need to implement  the interface below in your entry file.
 
 ```
 interface mfNode {
-    proto: object                 ## rpc proto object
+    email: string                 ## your email to identify who you are
     name: string                  ## your node name
     version: string               ## version
     urls: string                  ## release bundle url list or github repo url
     author: string                ## your name
-    email: string                 ## your email (will be public)
     description: string           ## code description
     icon: string                  ## code icon url (png)
     categories: Array<string>     ## categories for human
     resources: object             ## resources like github page or project website
+    proto: object                 ## rpc proto object
     init(): void                  ## will be executed at the first startup
     instance(): any               ## return rpc functions
 }
