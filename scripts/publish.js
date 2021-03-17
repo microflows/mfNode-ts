@@ -55,18 +55,18 @@ const cloud = config.cloud
 const currentVersion = '0.0.0'
 
 function main() {
-  // ensure the right repo url todo:with array
-  if (
-    readlineSync.question(
-      '\x1B[36mIs this your git repo address?(y/n)\x1B[0m ↓↓↓\n' + git + '\t\n'
-    ) !== 'y'
-  ) {
-    shell.echo(
-      '\x1B[31m[Error] Sorry, please write the right repo url in src/index !\x1B[0m'
-    )
-    shell.exit(1)
-  }
-  shell.echo()
+  // ensure the right repo url
+  // if (
+  //   readlineSync.question(
+  //     '\x1B[36mIs this your git repo address?(y/n)\x1B[0m ↓↓↓\n' + git + '\t\n'
+  //   ) !== 'y'
+  // ) {
+  //   shell.echo(
+  //     '\x1B[31m[Error] Sorry, please write the right repo url in src/index !\x1B[0m'
+  //   )
+  //   shell.exit(1)
+  // }
+  // shell.echo()
 
   // ensure version todo
   shell.echo('\x1B[36mEnsure the version right:\x1B[0m')
@@ -84,7 +84,10 @@ function main() {
 
   // push to current branch
   shell.echo('\x1B[36mPush to current branch:\x1B[0m')
-  shell.exec('git push')
+  if (shell.exec('git push').code !== 0) {
+    shell.echo('\x1B[31m[Error] Not a valid git repo url! You should fork this repo first!\x1B[0m')
+    shell.exit(1)
+  }
   shell.echo()
 
   // Switch to release branch
