@@ -74,7 +74,6 @@ function gitPush(branchs) {
     shell.echo('\x1B[31m[Error] The publish version must > the existing version!\x1B[0m')
     shell.exit(1)
   }
-  shell.echo()
 
   // ---
   shell.mv('build', 'release')
