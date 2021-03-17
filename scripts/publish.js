@@ -116,6 +116,11 @@ shell.echo()
 shell.mv('release', 'build')
 // ---
 
+// Clean the dir
+shell.echo('\x1B[36mClean the dir:\x1B[0m')
+shell.exec("git rm -r release && git commit -m '" + commitMessage + "' && git push")
+shell.echo()
+
 // print urls
 shell.echo(
   "\x1B[36mYour release has been upload to cloud, your mfNode's cdn address:\x1B[0m" +
