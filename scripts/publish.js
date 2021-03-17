@@ -41,7 +41,7 @@ if (!fs.existsSync('.git/config')) {
   shell.echo('Not a valid git repo!')
   shell.exit(1)
 }
-const git = iniparser.parseSync('.git/config')['remote "origin"']["url"]
+const git = iniparser.parseSync('.git/config')['remote "origin"']['url']
 const commitMessage = name + ': ' + version
 
 // read config
@@ -54,11 +54,7 @@ function main() {
   // ensure the right repo url todo:with array
   if (
     readlineSync.question(
-      '\x1B[36mIs this your git repo address?(y/n)\x1B[0m ↓↓↓\n' +
-        git
-          .replace('cdn.jsdelivr.net/gh', 'github.com')
-          .replace('@release/release/index.js', '') +
-        '\n'
+      '\x1B[36mIs this your git repo address?(y/n)\x1B[0m ↓↓↓\n' + git
     ) !== 'y'
   ) {
     shell.echo('Sorry, please write the right repo url!')
