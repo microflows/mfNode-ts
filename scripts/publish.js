@@ -6,7 +6,7 @@ const iniparser = require('iniparser')
 // ensure git is installed
 shell.echo('\x1B[36mGit Version:\x1B[0m')
 if (shell.exec('git --version').code !== 0) {
-  shell.echo('Sorry this script need git!')
+  shell.echo('\x1B[31m[Error] Sorry this script need git!\x1B[0m')
   shell.exit(1)
 }
 shell.echo()
@@ -19,7 +19,7 @@ const currentBranch = shell
   .replace('\n', '')
 if (currentBranch === 'release') {
   shell.echo(
-    'You should not dev in release branch! Please switch to your default branch!'
+    '\x1B[31m[Error] You should not dev in release branch! Please switch to your default branch!\x1B[0m'
   )
   shell.exit(1)
 }
@@ -27,7 +27,7 @@ shell.echo()
 
 // ensure builded
 if (!fs.existsSync('build')) {
-  shell.echo('You should run build before publish!')
+  shell.echo('\x1B[31m[Error] You should run build before publish!\x1B[0m')
   shell.exit(1)
 }
 
@@ -38,10 +38,11 @@ const version = metadata.version
 
 // git info
 if (!fs.existsSync('.git/config')) {
-  shell.echo('Not a valid git repo!')
+  shell.echo('\x1B[31m[Error] Not a valid git repo!\x1B[0m')
   shell.exit(1)
 }
 const git = iniparser.parseSync('.git/config')['remote "origin"']['url']
+if ( git.indexOf("http") !== -1 ) shell.echo("\x1B[33m[Warning] Your are using http git repo url, we recommand ssh!\x1B[0m")
 const commitMessage = name + ': ' + version
 
 // read config
@@ -57,7 +58,7 @@ function main() {
       '\x1B[36mIs this your git repo address?(y/n)\x1B[0m ↓↓↓\n' + git
     ) !== 'y'
   ) {
-    shell.echo('Sorry, please write the right repo url!')
+    shell.echo('\x1B[31m[Error] Sorry, please write the right repo url in src/index !\x1B[0m')
     shell.exit(1)
   }
   shell.echo()
