@@ -10,11 +10,12 @@ import filesize from 'rollup-plugin-filesize'
 import { uglify } from 'rollup-plugin-uglify'
 import proto from 'rollup-plugin-gproto'
 import globals from 'rollup-plugin-node-globals'
+import rollupTypescript from 'rollup-plugin-typescript2'  
 
 const isProd = process.env.NODE_ENV === 'production'
 
 export default {
-  input: 'src/index.js',
+  input: 'src/index.ts',
   output: {
     file: isProd ? 'dist/bundle.min.js' : 'dist/bundle.js',
     format: 'umd',
@@ -47,6 +48,7 @@ export default {
       include: ['src/**'],
       exclude: ['node_modules/**','src/*.proto'],
     }),
+    rollupTypescript(),
     babel({
       runtimeHelpers: true,
       exclude: 'node_modules/**',
