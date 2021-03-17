@@ -44,7 +44,7 @@ if (!fs.existsSync('.git/config')) {
 const git = iniparser.parseSync('.git/config')['remote "origin"']['url']
 if (git.indexOf('http') !== -1)
   shell.echo(
-    '\x1B[33m[Warning] Your are using http git repo url, we recommand ssh!\n Trun to: https://docs.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh \x1B[0m'
+    '\x1B[33m[Warning] Your are using http git repo url, we recommand ssh!\nTrun to: https://docs.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh \n\x1B[0m'
   )
 const commitMessage = name + ': ' + version
 
