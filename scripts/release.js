@@ -2,6 +2,7 @@
 const shell = require('shelljs')
 const fs = require('fs')
 const iniparser = require('iniparser')
+const compareVersions = require('compare-versions')
 
 // ensure git is installed
 shell.echo('\x1B[36mGit Version:\x1B[0m')
@@ -70,8 +71,10 @@ function gitPush(branchs) {
 
   // ensure version todo
   shell.echo('\x1B[36mEnsure the version right:\x1B[0m')
-  shell.echo(currentVersion, version)
-  // version >
+  if (compareVersions(version, currentVersion) !== 1) {
+    shell.echo('\x1B[31m[Error] The version to publish must > the existing version!\x1B[0m')
+    shell.exit(1)
+  }
   shell.echo()
 
   // ---
