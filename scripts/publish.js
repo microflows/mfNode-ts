@@ -16,9 +16,14 @@ const metadata = JSON.parse(fs.readFileSync("build/node.json"))
 
 const name = metadata.name
 const version = metadata.version
+const git = metadata.urls[0]
 const commitMessage = name + ": " + version
 
-// get branch
+// 确认仓库地址
+// ensure version todo
+
+
+// switch to release branch
 if (
 shell.exec("git add . && git commit -m '" + commitMessage + "'").code !== 0) {
   shell.echo('Sorry this script need git!')
@@ -28,22 +33,18 @@ shell.exec("git add . && git commit -m '" + commitMessage + "'").code !== 0) {
 if (
     shell.exec('git checkout release').code !== 0
   ) {
-      if (shell.exec('git checkout -b release && git branch --set-upstream-to=origin/release').code !== 0) {
+      if (shell.exec('git checkout -b release && git remote add release ' + git).code !== 0) {
         shell.exit(1)
       }
   }
 
-
 shell.mv("build","release")
 
-//   ensure version todo
-
-
 if (
-    shell.exec("git add . && git commit -m '" + commitMessage + "' && git push origin release").code !== 0
+    shell.exec("git add . && git commit -m '" + commitMessage + "' && git push --set-upstream release release").code !== 0
   ) {
-      
-        shell.exit(1)
+      shell.echo("Push failed!")
+      shell.exit(1)
   }
 
 //   upload metadata todo
@@ -55,4 +56,5 @@ shell.mv("release","build")
 // back to branch
 shell.exec('git checkout ' + currentBranch)
 
-shell.echo("Your release has been upload to cloud, your mfNode's cdn address:"+ "\n" + metadata.urls.join("\n"))
+// print urls
+shell.echo("Your release has been upload to cloud, your mfNode's cdn address:"+ "\n\t" + metadata.urls.join("\n"))
