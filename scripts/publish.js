@@ -93,7 +93,7 @@ function main() {
   if (shell.exec('git checkout release').code !== 0) {
     if (
       shell.exec(
-        'git checkout -b release && git remote add release ' + git + '\n'
+        'git checkout -b release && git remote add release ' + git + '\t\n'
       ).code !== 0
     ) {
       shell.exit(1)
