@@ -106,7 +106,7 @@ function gitPush(branchs) {
             ' && git remote add ' +
             branch +
             ' ' +
-            git
+            git + ' && git tag release'
         ).code !== 0
       ) {
         shell.exit(1)
