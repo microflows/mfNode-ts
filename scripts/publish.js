@@ -2,85 +2,83 @@
 // const git = simpleGit({
 //     baseDir: shell.pwd().toString()
 // })
-const readline = require('readline')
-const readSyncByRl = (tips) => {
-  tips = tips || '> '
-
-  return new Promise((resolve) => {
-      const rl = readline.createInterface({
-          input: process.stdin,
-          output: process.stdout
-      })
-
-      rl.question(tips, (answer) => {
-          rl.close()
-          resolve(answer.trim())
-      })
-  })
-}
+var readlineSync = require('readline-sync')
 const shell = require('shelljs')
 const config = require('../config')
 const fs = require('fs')
 const cloud = config.cloud
-const currentBranch = shell.exec("git branch --show-current").toString().replace("\n","")
+shell.echo("\x1B[36mCurrent branch:\x1B[0m")
+const currentBranch = shell
+  .exec('git branch --show-current')
+  .toString()
+  .replace('\n', '')
+shell.echo()
 
-if (!fs.existsSync("build")) {
+if (!fs.existsSync('build')) {
   shell.echo('You should run build before publish!')
   shell.exit(1)
 }
-const metadata = JSON.parse(fs.readFileSync("build/node.json"))
+const metadata = JSON.parse(fs.readFileSync('build/node.json'))
 
 const name = metadata.name
 const version = metadata.version
-const git = metadata.urls[0] || ""
-const commitMessage = name + ": " + version
+const git = metadata.urls[0] || ''
+const commitMessage = name + ': ' + version
 
 // 确认仓库地址
-readSyncByRl("\x1B[36mIs this your git repo address?(y/n)\x1B[0m >>> " + git).then(a => {
-
-    if (a !== "y") {
-      shell.echo('Sorry, please write the right repo url!')
-      shell.exit(1)
-    }
-    rl.close()
-
-})
-
+if (
+  readlineSync.question(
+    '\x1B[36mIs this your git repo address?(y/n)\x1B[0m ↓↓↓\n' + git.replace("cdn.jsdelivr.net/gh","github.com").replace("@release/release/index.js","") +"\n"
+  ) !== 'y'
+) {
+  shell.echo('Sorry, please write the right repo url!')
+  shell.exit(1)
+}
 
 // ensure version todo
 
 // switch to release branch
 if (
-shell.exec("git add . && git commit -m '" + commitMessage + "'").code !== 0) {
+  shell.exec("git add . && git commit -m '" + commitMessage + "'").code !== 0
+) {
   shell.echo('Sorry this script need git!')
   shell.exit(1)
 }
 
-if (
-    shell.exec('git checkout release').code !== 0
+if (shell.exec('git checkout release').code !== 0) {
+  if (
+    shell.exec('git checkout -b release && git remote add release ' + git)
+      .code !== 0
   ) {
-      if (shell.exec('git checkout -b release && git remote add release ' + git).code !== 0) {
-        shell.exit(1)
-      }
+    shell.exit(1)
   }
+}
 
-shell.mv("build","release")
+shell.mv('build', 'release')
 
 if (
-    shell.exec("git add * && git commit -m '" + commitMessage + "' && git push --set-upstream release release").code !== 0
-  ) {
-      shell.echo("Push failed!")
-      shell.exit(1)
-  }
+  shell.exec(
+    "git add * && git commit -m '" +
+      commitMessage +
+      "' && git push --set-upstream release release"
+  ).code !== 0
+) {
+  shell.echo('Push failed!')
+  shell.exit(1)
+}
 
-//   upload metadata todo
+// upload metadata todo
 // fetch post to cloud
-console.log("upload...")
+console.log('upload...')
 
-shell.mv("release","build")
+shell.mv('release', 'build')
 
 // back to branch
 shell.exec('git checkout ' + currentBranch)
 
 // print urls
-shell.echo("Your release has been upload to cloud, your mfNode's cdn address:"+ "\n\t" + metadata.urls.join("\n"))
+shell.echo(
+  "Your release has been upload to cloud, your mfNode's cdn address:" +
+    '\n\t' +
+    metadata.urls.join('\n')
+)
