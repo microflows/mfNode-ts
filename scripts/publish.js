@@ -27,6 +27,8 @@ const commitMessage = name + ': ' + version
 const config = require('../config')
 const cloud = config.cloud
 
+const currentVersion = "0.0.0"
+
 // ensure the right repo url
 if (
   readlineSync.question(
@@ -42,6 +44,10 @@ if (
 }
 
 // ensure version todo
+shell.echo('\x1B[36mEnsure the version right\x1B[0m')
+shell.echo(currentVersion,version)
+// version > 
+shell.echo()
 
 // commit to current branch
 shell.echo('\x1B[36mCommit to current branch\x1B[0m')
@@ -68,6 +74,8 @@ shell.echo()
 // ---
 shell.mv('build', 'release')
 
+// commit to release branch
+shell.echo('\x1B[36mCommit to release branch\x1B[0m')
 if (
   shell.exec(
     "git add * && git commit -m '" +
@@ -78,19 +86,23 @@ if (
   shell.echo('Push failed!')
   shell.exit(1)
 }
+shell.echo()
 
 // upload metadata todo
 // fetch post to cloud
 console.log('upload...')
 
 shell.mv('release', 'build')
+// ---
 
 // back to branch
+shell.echo('\x1B[36mBack to master branch\x1B[0m')
 shell.exec('git checkout ' + currentBranch)
+shell.echo()
 
 // print urls
 shell.echo(
-  "Your release has been upload to cloud, your mfNode's cdn address:" +
+  "\x1B[36mYour release has been upload to cloud, your mfNode's cdn address:\x1B[0m" +
     '\n\t' +
     metadata.urls.join('\n')
 )
