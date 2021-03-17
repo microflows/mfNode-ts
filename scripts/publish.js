@@ -40,7 +40,7 @@ shell.mv("build","release")
 
 
 if (
-    shell.exec("git add . && git commit -m '" + commitMessage + "' && git push").code !== 0
+    shell.exec("git add . && git commit -m '" + commitMessage + "' && git push origin release").code !== 0
   ) {
       
         shell.exit(1)
