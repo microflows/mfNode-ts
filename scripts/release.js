@@ -153,8 +153,8 @@ shell.echo()
 shell.echo(
   "\x1B[32mYour release has been upload to cloud, your mfNode's cdn address:\x1B[0m" +
     '\n\t' +
-    Array.copyWithin(metadata)
-      .urls.forEach((url) => url.replace('@release', '@' + version))
+    metadata.urls
+      .map((url) => url.replace('@release', '@' + version))
       .join('\n') +
     '\n'
 )
