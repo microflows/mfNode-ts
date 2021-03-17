@@ -118,7 +118,7 @@ function gitPush(branchs) {
     shell.echo('\x1B[36mMerge master to ' + branch + ' branch:\x1B[0m')
     if (
       shell.exec(
-        'git merge master && git push --set-upstream release'
+        'git merge master && git push --set-upstream release --tags'
       ).code !== 0
     ) {
       shell.exec('git checkout ' + currentBranch)
