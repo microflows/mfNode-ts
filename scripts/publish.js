@@ -92,6 +92,7 @@ if (
     .code !== 0
 ) {
   shell.exec('git checkout ' + currentBranch)
+  shell.mv('release', 'build')
   shell.echo('Push failed!')
   shell.exit(1)
 }
