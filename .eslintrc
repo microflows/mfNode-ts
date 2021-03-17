@@ -1,16 +1,24 @@
 {
+    "parser": "@typescript-eslint/parser",
     "env": {
         "browser": false,
         "commonjs": true,
         "es6": true,
         "node": true
     },
+    "extends": [
+		"eslint:recommended",
+		"plugin:@typescript-eslint/eslint-recommended"
+	],
     "parserOptions": {
         "ecmaFeatures": {
             "jsx": false
         },
         "sourceType": "module"
     },
+    "plugins": [
+		"@typescript-eslint"
+	],
     "rules": {
         "semi": ["error","never"]
     }

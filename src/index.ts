@@ -15,7 +15,7 @@ class myService implements mfNode {
     }
     this.proto = {}
     // handler your arguments here
-    if (arguments[0]) console.log(arguments)
+    if (args) console.log(args)
   }
   name: string
   version: string

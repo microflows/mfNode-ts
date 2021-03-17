@@ -24,6 +24,12 @@ export default {
   },
   plugins: [
     proto(),
+    eslint({
+      throwOnError: true,
+      throwOnWarning: true,
+      include: ['src/**'],
+      exclude: ['node_modules/**','src/*.proto'],
+    }),
     nodePolyfills(),
     resolve(),
     re({
@@ -42,12 +48,7 @@ export default {
     }),
     globals(),
     builtins(),
-    eslint({
-      throwOnError: true,
-      throwOnWarning: true,
-      include: ['src/**'],
-      exclude: ['node_modules/**','src/*.proto'],
-    }),
+
     rollupTypescript(),
     babel({
       runtimeHelpers: true,

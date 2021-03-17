@@ -1,9 +1,5 @@
-import createRouter from '@arangodb/foxx/router'
+import Greeter from './logics/Greeter'
 
-const router = createRouter()
-module.context.use(router)
+const _logics = { Greeter }
 
-router.get('/', (req, res) => {
-  res.write('Hello World!')
-})
-.response(['text/plain'])
+export { _logics as logics }
