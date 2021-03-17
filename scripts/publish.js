@@ -42,7 +42,10 @@ if (!fs.existsSync('.git/config')) {
   shell.exit(1)
 }
 const git = iniparser.parseSync('.git/config')['remote "origin"']['url']
-if ( git.indexOf("http") !== -1 ) shell.echo("\x1B[33m[Warning] Your are using http git repo url, we recommand ssh!\x1B[0m")
+if (git.indexOf('http') !== -1)
+  shell.echo(
+    '\x1B[33m[Warning] Your are using http git repo url, we recommand ssh!\x1B[0m'
+  )
 const commitMessage = name + ': ' + version
 
 // read config
@@ -58,7 +61,9 @@ function main() {
       '\x1B[36mIs this your git repo address?(y/n)\x1B[0m ↓↓↓\n' + git
     ) !== 'y'
   ) {
-    shell.echo('\x1B[31m[Error] Sorry, please write the right repo url in src/index !\x1B[0m')
+    shell.echo(
+      '\x1B[31m[Error] Sorry, please write the right repo url in src/index !\x1B[0m'
+    )
     shell.exit(1)
   }
   shell.echo()
@@ -87,8 +92,9 @@ function main() {
   shell.exec('git config advice.addIgnoredFile false')
   if (shell.exec('git checkout release').code !== 0) {
     if (
-      shell.exec('git checkout -b release && git remote add release ' + git)
-        .code !== 0
+      shell.exec(
+        'git checkout -b release && git remote add release ' + git + '\n'
+      ).code !== 0
     ) {
       shell.exit(1)
     }
@@ -130,7 +136,7 @@ function main() {
 
   // print urls
   shell.echo(
-    "\x1B[36mYour release has been upload to cloud, your mfNode's cdn address:\x1B[0m" +
+    "\x1B[32mYour release has been upload to cloud, your mfNode's cdn address:\x1B[0m" +
       '\n\t' +
       metadata.urls.join('\n')
   )
