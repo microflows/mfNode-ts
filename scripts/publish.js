@@ -96,8 +96,9 @@ if (
 shell.echo()
 
 // upload metadata todo
-// fetch post to cloud
+shell.echo('\x1B[36mUpload metadata:\x1B[0m')
 console.log('upload...')
+shell.echo()
 
 shell.mv('release', 'build')
 // ---
@@ -113,3 +114,4 @@ shell.echo(
     '\n\t' +
     metadata.urls.join('\n')
 )
+shell.echo()
