@@ -11,7 +11,7 @@ const language = config.language
 const pwd = shell.pwd()
 
 // read metadata
-function addAnnotationInfoToMetaData() {
+function addCommentToMetaData() {
   const re = /\/\*\* @(.*?) !\*\//g
   const fn = /@(.*?) /
   const rn = /{(.*?)}/
@@ -42,16 +42,16 @@ function addAnnotationInfoToMetaData() {
   const protoJSON = new Object(
     protobuf.loadSync(pwd + '/src/' + protoFileName).toJSON()
   )
-  // find methods and inject annotation data in it
+  // find methods and inject comment data in it
   // todo: test namespace
-  // todo: test mutiline annotation
+  // todo: test mutiline comment
   const serviceAndMessageListObj =
     protoJSON['nested'][Object.keys(protoJSON['nested'])[0]]['nested']
   const serviceName = findServiceName(serviceAndMessageListObj)
-  data.match(re).forEach((annotation) => {
-    const functionName = annotation.match(fn)[1]
-    const readableName = annotation.match(rn)[1]
-    const description = annotation.match(ds)[1]
+  data.match(re).forEach((comment) => {
+    const functionName = comment.match(fn)[1]
+    const readableName = comment.match(rn)[1]
+    const description = comment.match(ds)[1]
 
     serviceAndMessageListObj[serviceName]['methods'][
       functionName
@@ -125,7 +125,7 @@ function main() {
         // write metadata
         fs.writeFileSync(
           pwd + '/build/node.json',
-          JSON.stringify(addAnnotationInfoToMetaData())
+          JSON.stringify(addCommentToMetaData())
         )
         shell.echo(
           "\n\x1B[32mSuccess! Use 'yarn release' to release your new " +
