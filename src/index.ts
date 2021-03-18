@@ -1,17 +1,18 @@
+import { logics } from "./internel/index"
 import mfNode from './types/index'
 
 class myService implements mfNode {
   constructor(...args: any[]) {
     this.email = "gonorth@qq.com"
-    this.name = "foxx-mf"
+    this.name = "mfNode.ts"
     this.version = "0.0.1"
-    this.urls = ["https://github.com/microflows/foxx-mf"]
+    this.urls = ["https://github.com/microflows/mfNode.ts"]
     this.author = ""
     this.description = ""
     this.icon = ""
     this.categories = ["demo"]
     this.resources = {
-      "git":"https://github.com/microflows/foxx-mf"
+      "git":"https://github.com/microflows/mfNode.ts"
     }
     this.proto = {}
     // handler your arguments here
@@ -29,7 +30,9 @@ class myService implements mfNode {
   proto: object;
 
   init() {}
-  instance() {}
+  instance() {
+    return logics 
+  }
 }
 
 export default function newService(...args:any) {

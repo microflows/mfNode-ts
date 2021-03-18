@@ -12,7 +12,7 @@ const pwd = shell.pwd()
 
 // read metadata
 function addAnnotationInfoToMetaData() {
-  const re = /\/\*\* @(.*?) \*\//g
+  const re = /\/\*\* @(.*?) !\*\//g
   const fn = /@(.*?) /
   const rn = /{(.*?)}/
   const ds = /\[(.*?)\]/
