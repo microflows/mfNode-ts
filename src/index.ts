@@ -1,5 +1,6 @@
 import { logics } from "./internel/index"
 import mfNode from './types/index'
+import proto from './hello.proto'
 
 class myService implements mfNode {
   constructor(...args: any[]) {
@@ -14,7 +15,7 @@ class myService implements mfNode {
     this.resources = {
       "git":"https://github.com/microflows/mfNode.ts"
     }
-    this.proto = {}
+    this.proto = proto
     // handler your arguments here
     if (args) console.log(args)
   }
