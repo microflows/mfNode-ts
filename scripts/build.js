@@ -4,6 +4,7 @@ const fs = require('fs')
 const protobuf = require('protobufjs')
 const crypto = require('crypto')
 const config = require('../config')
+const { Date } = require('core-js')
 
 const tag = config.tag
 const pwd = shell.pwd()
@@ -95,6 +96,7 @@ function addAnnotationInfoToMetaData() {
 
   // add node tag
   serviceMetaObj.tag = tag
+  serviceMetaObj.buildtime = Date.now()
 
   return serviceMetaObj
 }
