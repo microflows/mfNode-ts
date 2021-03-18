@@ -1,4 +1,5 @@
 module.exports = config = {
     "cloud": "microflow.cloud",
-    "tag": "buildin"
+    "tag": "buildin",
+    "language": "typescript"
 }

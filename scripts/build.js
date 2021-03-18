@@ -7,6 +7,7 @@ const config = require('../config')
 const { Date } = require('core-js')
 
 const tag = config.tag
+const language = config.language
 const pwd = shell.pwd()
 
 // read metadata
@@ -97,7 +98,8 @@ function addAnnotationInfoToMetaData() {
   // add node tag
   serviceMetaObj.tag = tag
   serviceMetaObj.buildtime = Date.now()
-
+  serviceMetaObj.language = language
+  
   return serviceMetaObj
 }
 
