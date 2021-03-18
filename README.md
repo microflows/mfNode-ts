@@ -12,7 +12,7 @@ Easily build any remote module/script or UI component as usual
 
 ### Steps
 
-- [ ] Fork this repo
+- [ ] [Use this template](https://github.com/microflows/mfNode.ts/generate)
 - [ ] Git clone your repo to local
 - [ ] Use `yarn && yarn dev` to start development
 - [ ] Use `yarn release` to publish
