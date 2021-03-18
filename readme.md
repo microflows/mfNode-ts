@@ -15,7 +15,7 @@ Easily build any remote module/script or UI component as usual
 - [ ] Fork this repo
 - [ ] Git clone your repo to local
 - [ ] Use `yarn && yarn dev` to start development
-- [ ] Use `yarn build && yarn release` to publish
+- [ ] Use `yarn release` to publish
 - [ ] View the release in your cloud account
 
 ### What is a remote module?
