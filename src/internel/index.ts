@@ -2,4 +2,4 @@ import Greeter from './logics/Greeter'
 
 const _logics = { Greeter }
 
-export { _logics as logics }
+export { _logics as default }

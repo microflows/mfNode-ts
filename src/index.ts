@@ -1,4 +1,4 @@
-import { logics } from "./internel/index"
+import logics from "./internel/index"
 import mfNode from './types/index'
 import proto from './hello.proto'
 
