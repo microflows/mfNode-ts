@@ -28,7 +28,7 @@ if (!fs.existsSync('build')) {
 }
 
 // read metadata
-const metadata = JSON.parse(fs.readFileSync('build/node.json'))
+const metadata = JSON.parse(fs.readFileSync('build/index.json'))
 const name = metadata.name
 const version = metadata.version
 
