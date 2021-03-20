@@ -1,5 +1,6 @@
 [
   "src/hello.proto",
   "src/index.ts",
+  "src/internel/index.ts",
   "src/internel/logics/Greeter.ts"
 ]
