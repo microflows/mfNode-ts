@@ -1,8 +1,8 @@
-// const readlineSync = require('readline-sync')
-const shell = require('shelljs')
-const fs = require('fs')
-const iniparser = require('iniparser')
-const compareVersions = require('compare-versions')
+import shell from "shelljs"
+import fs from "fs"
+import iniparser from "iniparser"
+import compareVersions from "compare-versions"
+import config from "../config.mjs"
 
 // ensure git is installed
 shell.echo('\x1B[36mGit Version:\x1B[0m')
@@ -46,7 +46,6 @@ const commitMessage = name + ': ' + version
 const releaseBranchName = ['publish']
 
 // read config
-const config = require('../config')
 const cloud = config.cloud
 
 const currentVersion = '0.0.0'

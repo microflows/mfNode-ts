@@ -1,6 +1,5 @@
-const Mali = require('mali')
-
-const newNode = require('../build/index')
+import Mali from 'mali'
+import newNode from '../build/index'
 
 const node = newNode()
 const app = new Mali(node.proto)

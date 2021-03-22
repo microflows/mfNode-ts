@@ -31,7 +31,11 @@ export default {
       exclude: ['node_modules/**','src/*.proto'],
     }),
     nodePolyfills(),
-    resolve(),
+    resolve({
+      browser:true,
+      skipSelf: true,
+      only:[/^((?!@microflows\/nodevm).)*$/]
+    }),
     re({
       patterns: [
         {

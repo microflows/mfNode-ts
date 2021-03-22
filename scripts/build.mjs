@@ -1,10 +1,9 @@
-const shell = require('shelljs')
-const ncc = require('@vercel/ncc')
-const fs = require('fs')
-const protobuf = require('protobufjs')
-const crypto = require('crypto')
-const config = require('../config')
-const { Date } = require('core-js')
+import shell from "shelljs"
+// const ncc = require('@vercel/ncc')
+import fs from "fs"
+import protobuf from "protobufjs"
+import crypto from "crypto"
+import config from "../config.mjs"
 
 const tag = config.tag
 const language = config.language
@@ -21,12 +20,14 @@ function addCommentToMetaData() {
     .filter((name) => name.indexOf('.proto') !== -1)[0]
 
   const findServiceName = (obj) => {
+    var keys = []
     for (const key in obj) {
       if (Object.hasOwnProperty.call(obj, key)) {
         const element = obj[key]
-        if (Object.keys(element)[0] === 'methods') return key
+        if (Object.keys(element)[0] === 'methods') keys.push(key)
       }
     }
+    return keys
   }
 
   const createFileHash256Sync = (filename) => {
@@ -43,26 +44,36 @@ function addCommentToMetaData() {
     protobuf.loadSync(pwd + '/src/' + protoFileName).toJSON()
   )
   // find methods and inject comment data in it
-  // todo: test namespace
-  // todo: test mutiline comment
-  const serviceAndMessageListObj =
+  const serviceAndMessageListExistObj =
     protoJSON['nested'][Object.keys(protoJSON['nested'])[0]]['nested']
-  const serviceName = findServiceName(serviceAndMessageListObj)
-  data.match(re).forEach((comment) => {
-    const functionName = comment.match(fn)[1]
-    const readableName = comment.match(rn)[1]
-    const description = comment.match(ds)[1]
+  const serviceAndMessageListObj =
+    serviceAndMessageListExistObj === undefined
+      ? protoJSON['nested']
+      : serviceAndMessageListExistObj
+  const serviceNames = findServiceName(serviceAndMessageListObj)
+  serviceNames.forEach((serviceName) =>
+    data.match(re).forEach((comment) => {
+      const functionName = comment.match(fn)[1]
+      const readableName = comment.match(rn)[1]
+      const description = comment.match(ds)[1]
 
-    serviceAndMessageListObj[serviceName]['methods'][
-      functionName
-    ].readableName = readableName
-    serviceAndMessageListObj[serviceName]['methods'][
-      functionName
-    ].description = description
-  })
+      if (
+        serviceAndMessageListObj[serviceName]['methods'][functionName] !==
+        undefined
+      ) {
+        serviceAndMessageListObj[serviceName]['methods'][
+          functionName
+        ].readableName = readableName
+        serviceAndMessageListObj[serviceName]['methods'][
+          functionName
+        ].description = description
+      }
+    })
+  )
 
   // read metadata
   const loadModuleLocal = () => {
+    const exports = {}
     const module = { exports }
     const func = new Function('module', 'exports', data)
     func(module, exports)
@@ -115,24 +126,31 @@ function main() {
       shell.exit(1)
     }
     shell.echo()
-    shell.echo('\x1B[36mNCC build\x1B[0m')
+    // shell.echo('\x1B[36mNCC build\x1B[0m')
     // ncc build
-    ncc(pwd + '/dist/bundle.min.js', { minify: true }).then(
-      ({ code, map, assets }) => {
-        if (!fs.existsSync(pwd + '/build')) shell.mkdir(pwd + '/build')
+    // ncc(pwd + '/dist/bundle.min.js', { minify: true }).then(
+    //   ({ code, map, assets }) => {
+    //     if (!fs.existsSync(pwd + '/build')) shell.mkdir(pwd + '/build')
 
-        fs.writeFileSync('build/index.js', code)
-        // write metadata
-        fs.writeFileSync(
-          pwd + '/build/index.json',
-          JSON.stringify(addCommentToMetaData())
-        )
-        shell.echo(
-          "\n\x1B[32mSuccess! Use 'yarn release' to release your new " +
-            tag +
-            '! \x1B[0m'
-        )
-      }
+    //     fs.writeFileSync('build/index.js', code)
+    //     // write metadata
+    //     fs.writeFileSync(
+    //       pwd + '/build/index.json',
+    //       JSON.stringify(addCommentToMetaData())
+    //     )
+    //   }
+    // )
+    if (!fs.existsSync(pwd + '/build')) shell.mkdir(pwd + '/build')
+    shell.cp(pwd + '/dist/bundle.min.js', pwd + '/build/index.js')
+    // write metadata
+    fs.writeFileSync(
+      pwd + '/build/index.json',
+      JSON.stringify(addCommentToMetaData())
+    )
+    shell.echo(
+      "\n\x1B[32mSuccess! Use 'yarn release' to release your new " +
+        tag +
+        '! \x1B[0m'
     )
   } catch (error) {
     shell.echo('\n\x1B[31m[Error]Failed!\x1B[0m')
